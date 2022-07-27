@@ -1,22 +1,47 @@
+import { useState } from 'react';
 import './App.css';
 
-function App() {
+
+
+function Header({ setContent }) {
+
+  const handleClick = () => {
+    setContent('logged')
+  }
   return (
+    <div>
+      Header
+      <button onClick={handleClick}>Loggin</button>
+    </div>
+  )
+}
+
+function Content({ content }) {
+  return (
+    <div>
+      {content}
+    </div>
+  )
+}
+
+function Footer() {
+  return (
+    <div>
+      Footer
+    </div>
+  )
+}
+
+
+
+function App() {
+  const [content, setContent] = useState('not loggin')
+  return (
+
     <div className="App">
-      <header className="App-header">
-       
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header setContent={setContent} />
+      <Content content={content} />
+      <Footer />
     </div>
   );
 }
