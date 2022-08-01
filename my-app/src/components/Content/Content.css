@@ -1,4 +1,10 @@
 .content {
   display: flex;
   flex: 1;
+  flex-direction: column;
+}
+.title {
+  font-size: 110px;
+  justify-content: center;
+  display: flex;
 }
