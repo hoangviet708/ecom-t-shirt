@@ -1,0 +1,119 @@
+.navbar-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.navbar-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    width: 98px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+
+}
+
+.navbar-brand a {
+    font-size: 20px;
+    font-weight: 600;
+    font-stretch: condensed;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-search {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+
+}
+
+.navbar-search::after {
+    position: absolute;
+    content: "";
+    height: 1px;
+    background-color: #242424;
+    width: 150px;
+    margin-left: 15px;
+    top: 55px;
+    display: none;
+}
+
+.navbar-search:hover::after {
+    display: block;
+}
+
+.navbar-search .search-icon {
+    margin-right: 10px;
+}
+
+.navbar-search .search-icon label {
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.navbar-search .search-input input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    width: 150px;
+    font-size: 16px;
+    padding: 5px 0;
+
+}
+
+.navbar-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-right .navbar-links {
+    display: flex;
+}
+
+.navbar-right .navbar-link {
+    list-style: none;
+    margin-left: 25px;
+}
+
+.navbar-right .navbar-link a {
+    text-decoration: none;
+    color: #000;
+    transition: 0.2s ease-in;
+}
+
+.navbar-right .navbar-link a:hover {
+    color: tomato;
+}
+
+.navbar-right .navbar-login {
+    margin-left: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right .navbar-login i {
+    font-size: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+
+.navbar-right .navbar-login span {
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.navbar-right .navbar-cart {
+    font-size: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+}

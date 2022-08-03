@@ -1,17 +1,21 @@
 .productItem {
-  margin: 35px 35px;
-  width: 20%
+  padding: 35px 35px;
+  width: 25%
 }
+
 .productItem:hover {
   cursor: pointer;
 }
+
 .viewProductImage {
-  position: relative; 
+  position: relative;
 }
+
 .productImage {
   width: 100%;
 }
-.quickViewButton  {
+
+.quickViewButton {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -22,6 +26,7 @@
   border: none;
   cursor: pointer;
 }
-.cost { 
+
+.cost {
   color: tomato;
 }

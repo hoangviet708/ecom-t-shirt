@@ -1,5 +1,9 @@
 .header {
   display: flex;
   height: 72px;
-  background-color:burlywood;
+  background-color: rgb(252, 252, 252);
+  padding: 0 80px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
