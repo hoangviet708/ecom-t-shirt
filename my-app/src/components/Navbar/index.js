@@ -1,4 +1,5 @@
 import "./Navbar.css";
+import { AutoSuggest } from "../";
 
 export const Navbar = () => {
   return (
@@ -7,19 +8,8 @@ export const Navbar = () => {
         <div className="navbar-brand">
           <a href="/">N O U S</a>
         </div>
-        <div className="navbar-search">
-          <div className="search-icon">
-            <label htmlFor="search">
-              {" "}
-              <i class="fa-solid fa-magnifying-glass"></i>{" "}
-            </label>
-          </div>
-          <div className="search-input">
-            <input id="search" type="text" placeholder="Search..." />
-          </div>
-        </div>
+        <AutoSuggest />
       </div>
-
       <div className="navbar-right">
         <ul className="navbar-links">
           <li className="navbar-link">
