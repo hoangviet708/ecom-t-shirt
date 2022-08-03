@@ -2,9 +2,11 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin: 0 80px;
 }
+
 .title {
-  font-size: 110px;
+  /* font-size: px; */
   justify-content: center;
   display: flex;
 }
