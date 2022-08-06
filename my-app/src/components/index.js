@@ -5,6 +5,7 @@ import { ProductList } from "./ProductList";
 import { ProductItem } from "./ProductItem";
 import { Navbar } from "./Navbar";
 import { AutoSuggest } from "./AutoSuggest";
+import { Slide } from "./Slide";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   ProductItem,
   Navbar,
   AutoSuggest,
+  Slide,
 };

@@ -1,34 +1,38 @@
 import "./ProductItem.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export const ProductItem = ({ product }) => {
-  const [style, setStyle] = useState({ display: "none" });
+  const [quickView, setQuickView] = useState("quickViewButton");
+  const ref = useRef();
 
   const onClickQuickView = (product) => () => {
     //TODO: console.log("product", product);
   };
 
+  const onMouseEnter = () => {
+    setQuickView("quickViewButton open");
+    ref.current.src = product.imageBack;
+  };
+
+  const onMouseLeave = () => {
+    setQuickView("quickViewButton");
+    ref.current.src = product.imageFront;
+  };
+
   return (
     <div
       className="productItem"
-      onMouseEnter={(e) => {
-        setStyle({ display: "block" });
-      }}
-      onMouseLeave={(e) => {
-        setStyle({ display: "none" });
-      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="viewProductImage">
         <img
-          src={product.image}
+          src={product.imageFront}
           className="productImage"
           alt={product.productName}
+          ref={ref}
         />
-        <button
-          onClick={onClickQuickView(product)}
-          className="quickViewButton"
-          style={style}
-        >
+        <button onClick={onClickQuickView(product)} className={quickView}>
           Quick View
         </button>
       </div>
