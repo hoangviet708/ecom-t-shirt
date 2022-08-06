@@ -42,27 +42,19 @@
   color: #ff6200;
 }
 
-.slideContainer .imageSilde {
+.slideContainer .slides {
   display: flex;
   margin-bottom: 50px;
 }
 
-.slideContainer .imageSilde .img1 {
+.slideContainer .slides .slideImage {
   width: 25%;
   object-fit: cover;
   object-position: 50% 50%;
   padding-right: 10px;
 }
 
-.slideContainer .imageSilde .img2 {
-  width: 25%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  padding-right: 10px;
-}
-
-.slideContainer .imageSilde .img3 {
+.slideContainer .slides .slideImage:last-child  {
+  padding-right: 0px;
   width: 50%;
-  object-fit: cover;
-  object-position: 50% 50%;
 }
