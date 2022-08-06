@@ -1,7 +1,10 @@
 import "./Navbar.css";
 import { AutoSuggest } from "../";
+import useFetchUsers from "../../common/hooks/useFetchUsers";
 
 export const Navbar = () => {
+  const [users] = useFetchUsers();
+
   return (
     <div className="navbar-container">
       <div className="navbar-left">
@@ -33,7 +36,7 @@ export const Navbar = () => {
         </ul>
         <div className="navbar-login">
           <i class="fa-solid fa-circle-user"></i>
-          <span>Log In</span>
+          <span>{users ? users[0].userId : "Log In"}</span>
         </div>
         <div className="navbar-cart">
           <i class="fa-solid fa-cart-shopping"></i>
