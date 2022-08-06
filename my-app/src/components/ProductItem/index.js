@@ -9,17 +9,21 @@ export const ProductItem = ({ product }) => {
     //TODO: console.log("product", product);
   };
 
+  const onMouseEnter = () => {
+    setQuickView("quickViewButton open");
+    ref.current.src = product.imageBack;
+  };
+
+  const onMouseLeave = () => {
+    setQuickView("quickViewButton");
+    ref.current.src = product.imageFront;
+  };
+
   return (
     <div
       className="productItem"
-      onMouseEnter={(e) => {
-        setQuickView("quickViewButton open");
-        ref.current.src = product.imageBack;
-      }}
-      onMouseLeave={(e) => {
-        setQuickView("quickViewButton");
-        ref.current.src = product.imageFront;
-      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="viewProductImage">
         <img
