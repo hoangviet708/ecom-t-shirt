@@ -8,4 +8,15 @@
 .title {
   justify-content: center;
   display: flex;
+  position: relative;
+  font-size: 80px;
+}
+
+.title .line-title {
+  width: 560px;
+  height: 10px;
+  background-color: tomato;
+  position: absolute;
+  bottom: 19px;
+  z-index: -1;
 }
