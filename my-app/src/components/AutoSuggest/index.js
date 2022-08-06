@@ -3,7 +3,7 @@ import "./AutoSuggest.css";
 import { productLists } from "../../common/sampleData";
 import { ClearSearchIcon } from "../../assets/img/ClearSearchIcon";
 
-const LIMIT_SEARCH = 5;
+const LIMIT_SEARCH_KEYWORD = 5;
 
 export const AutoSuggest = () => {
   const [searchProducts, setSearchProducts] = useState([]);
@@ -17,8 +17,8 @@ export const AutoSuggest = () => {
         product.productName.toLowerCase().includes(searchTerms.toLowerCase())
       );
       if (filterData && filterData.length > 0) {
-        if (filterData.length > LIMIT_SEARCH) {
-          let filterDataLimit = filterData.slice(0, LIMIT_SEARCH);
+        if (filterData.length > LIMIT_SEARCH_KEYWORD) {
+          let filterDataLimit = filterData.slice(0, LIMIT_SEARCH_KEYWORD);
           setSearchProducts(filterDataLimit);
         } else {
           setSearchProducts(filterData);
