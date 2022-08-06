@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import "./AutoSuggest.css";
 import { productLists } from "../../common/sampleData";
+import { ClearSearchIcon } from "../../assets/img/ClearSearchIcon";
+
+const LIMIT_SEARCH = 5;
 
 export const AutoSuggest = () => {
   const [searchProducts, setSearchProducts] = useState([]);
@@ -14,8 +17,8 @@ export const AutoSuggest = () => {
         product.productName.toLowerCase().includes(searchTerms.toLowerCase())
       );
       if (filterData && filterData.length > 0) {
-        if (filterData.length > 5) {
-          let filterDataLimit = filterData.slice(0, 5);
+        if (filterData.length > LIMIT_SEARCH) {
+          let filterDataLimit = filterData.slice(0, LIMIT_SEARCH);
           setSearchProducts(filterDataLimit);
         } else {
           setSearchProducts(filterData);
@@ -32,6 +35,10 @@ export const AutoSuggest = () => {
     ref.current.value = "";
     setSearchProducts([]);
     ref.current.focus();
+  };
+
+  const handleBlur = () => {
+    setSearchProducts([]);
   };
 
   const SearchItem = ({ searchProducts }) => {
@@ -77,9 +84,7 @@ export const AutoSuggest = () => {
           type="text"
           placeholder="Search..."
           onChange={handleSearch}
-          onBlur={() => {
-            setSearchProducts([]);
-          }}
+          onBlur={handleBlur}
         />
       </div>
       <div
@@ -88,17 +93,7 @@ export const AutoSuggest = () => {
           ref.current && ref.current.value ? "clear-icon active" : "clear-icon"
         }
       >
-        <svg
-          width="8"
-          height="9"
-          viewBox="0 0 8 9"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8 1.057L7.293.35 4 3.643.707.35 0 1.057 3.293 4.35 0 7.643l.707.707L4 5.057 7.293 8.35 8 7.643 4.707 4.35 8 1.057z"
-            fill="currentcolor"
-          ></path>
-        </svg>
+        <ClearSearchIcon />
       </div>
       {searchProducts && searchProducts.length > 0 && (
         <SearchItem searchProducts={searchProducts} />
