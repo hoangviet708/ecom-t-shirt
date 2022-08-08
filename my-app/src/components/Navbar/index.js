@@ -1,9 +1,9 @@
 import "./Navbar.css";
 import { AutoSuggest } from "../";
-import useFetchUsers from "../../common/hooks/useFetchUsers";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-  const [users] = useFetchUsers();
+  const isLoginPage = window.location.pathname.includes("/login");
 
   return (
     <div className="navbar-container">
@@ -11,36 +11,42 @@ export const Navbar = () => {
         <div className="navbar-brand">
           <a href="/">N O U S</a>
         </div>
-        <AutoSuggest />
+        {!isLoginPage && <AutoSuggest />}
       </div>
       <div className="navbar-right">
-        <ul className="navbar-links">
-          <li className="navbar-link">
-            <a href="/">Shop All</a>
-          </li>
-          <li className="navbar-link">
-            <a href="/">Women</a>
-          </li>
-          <li className="navbar-link">
-            <a href="/">Men</a>
-          </li>
-          <li className="navbar-link">
-            <a href="/">Sale</a>
-          </li>
-          <li className="navbar-link">
-            <a href="/">About</a>
-          </li>
-          <li className="navbar-link">
-            <a href="/">Contact</a>
-          </li>
-        </ul>
-        <div className="navbar-login">
-          <i class="fa-solid fa-circle-user"></i>
-          <span>{users ? users[0].userId : "Log In"}</span>
-        </div>
-        <div className="navbar-cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </div>
+        {!isLoginPage && (
+          <ul className="navbar-links">
+            <li className="navbar-link">
+              <a href="/">Shop All</a>
+            </li>
+            <li className="navbar-link">
+              <a href="/">Women</a>
+            </li>
+            <li className="navbar-link">
+              <a href="/">Men</a>
+            </li>
+            <li className="navbar-link">
+              <a href="/">Sale</a>
+            </li>
+            <li className="navbar-link">
+              <a href="/">About</a>
+            </li>
+            <li className="navbar-link">
+              <a href="/">Contact</a>
+            </li>
+          </ul>
+        )}
+        {!isLoginPage && (
+          <div className="navbar-login">
+            <i class="fa-solid fa-circle-user" />
+            <Link to="login">Log In</Link>
+          </div>
+        )}
+        {!isLoginPage && (
+          <div className="navbar-cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        )}
       </div>
     </div>
   );
