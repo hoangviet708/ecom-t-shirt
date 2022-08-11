@@ -6,6 +6,7 @@ import { ProductItem } from "./ProductItem";
 import { Navbar } from "./Navbar";
 import { AutoSuggest } from "./AutoSuggest";
 import { Slide } from "./Slide";
+import { FormLogin } from "./FormLogin";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   Navbar,
   AutoSuggest,
   Slide,
+  FormLogin,
 };

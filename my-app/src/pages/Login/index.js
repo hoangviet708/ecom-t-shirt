@@ -1,16 +1,11 @@
 import { Header, Footer, Content } from "../../components";
+import { FormLogin } from "../../components";
 
 const LoginPage = () => {
   return (
     <div>
       <Header />
-      <Content
-        children={
-          <>
-            <h1>LOGIN</h1>
-          </>
-        }
-      />
+      <Content children={<FormLogin />} />
       <Footer />
     </div>
   );
