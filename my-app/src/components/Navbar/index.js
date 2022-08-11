@@ -3,7 +3,10 @@ import { AutoSuggest } from "../";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-  const isLoginPage = window.location.pathname.includes("/login");
+  const isHiddenNav =
+    window.location.pathname.includes("/login") ||
+    window.location.pathname.includes("/product") ||
+    window.location.pathname.includes("/search");
 
   return (
     <div className="navbar-container">
@@ -11,10 +14,10 @@ export const Navbar = () => {
         <div className="navbar-brand">
           <a href="/">N O U S</a>
         </div>
-        {!isLoginPage && <AutoSuggest />}
+        {!isHiddenNav && <AutoSuggest />}
       </div>
       <div className="navbar-right">
-        {!isLoginPage && (
+        {!isHiddenNav && (
           <ul className="navbar-links">
             <li className="navbar-link">
               <a href="/">Shop All</a>
@@ -36,13 +39,13 @@ export const Navbar = () => {
             </li>
           </ul>
         )}
-        {!isLoginPage && (
+        {!isHiddenNav && (
           <div className="navbar-login">
             <i class="fa-solid fa-circle-user" />
             <Link to="login">Log In</Link>
           </div>
         )}
-        {!isLoginPage && (
+        {!isHiddenNav && (
           <div className="navbar-cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </div>

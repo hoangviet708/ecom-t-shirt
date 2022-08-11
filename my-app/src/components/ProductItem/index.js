@@ -1,12 +1,14 @@
 import "./ProductItem.css";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ProductItem = ({ product }) => {
   const [quickView, setQuickView] = useState("quickViewButton");
   const ref = useRef();
+  const navigate = useNavigate();
 
   const onClickQuickView = (product) => () => {
-    //TODO: console.log("product", product);
+    navigate(`product/${product.id}`);
   };
 
   const onMouseEnter = () => {
@@ -21,6 +23,7 @@ export const ProductItem = ({ product }) => {
 
   return (
     <div
+      onClick={onClickQuickView(product)}
       className="productItem"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -32,9 +35,7 @@ export const ProductItem = ({ product }) => {
           alt={product.productName}
           ref={ref}
         />
-        <button onClick={onClickQuickView(product)} className={quickView}>
-          Quick View
-        </button>
+        <button className={quickView}>Quick View</button>
       </div>
       <h3>{product.productName ?? "N/A"}</h3>
       <span className="cost">

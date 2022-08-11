@@ -1,13 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./AutoSuggest.css";
 import { productLists } from "../../common/sampleData";
 import { ClearSearchIcon } from "../../assets/img/ClearSearchIcon";
+import { useNavigate } from "react-router-dom";
 
 const LIMIT_SEARCH_KEYWORD = 5;
 
 export const AutoSuggest = () => {
   const [searchProducts, setSearchProducts] = useState([]);
   const ref = useRef();
+  const navigate = useNavigate();
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(wrapperRef) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+          ref.current.value = "";
+          setSearchProducts([]);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [wrapperRef]);
+  }
 
   const handleSearch = (event) => {
     const searchTerms = event.target.value;
@@ -37,18 +58,25 @@ export const AutoSuggest = () => {
     ref.current.focus();
   };
 
-  const handleBlur = () => {
-    setSearchProducts([]);
+  const onClickProductItem = (product) => () => {
+    navigate(`product/${product.id}`);
+  };
+
+  const onClickSearchAll = () => {
+    navigate(`search/${ref.current.value}`);
   };
 
   const SearchItem = ({ searchProducts }) => {
     return (
-      <div className="suggestContainer">
+      <div ref={wrapperRef} className="suggestContainer">
         <p className="suggestContainerTitle">Products</p>
-        <ul className="suggestListItems">
+        <di className="suggestListItems">
           {searchProducts.map((product) => (
-            <li className="suggestItem" key={product.id}>
-              <a href="/" className="suggestItemLink">
+            <div className="suggestItem" key={product.id}>
+              <div
+                className="suggestItemLink"
+                onClick={onClickProductItem(product)}
+              >
                 <img
                   src={product.imageFront}
                   className="suggestItemImg"
@@ -59,11 +87,11 @@ export const AutoSuggest = () => {
                   <p className="suggestItemDetailName">{product.productName}</p>
                   <p className="suggestItemDetailDes">{product.description}</p>
                 </div>
-              </a>
-            </li>
+              </div>
+            </div>
           ))}
-        </ul>
-        <button className="searchAllBtn">
+        </di>
+        <button className="searchAllBtn" onClick={onClickSearchAll}>
           <i class="fa-solid fa-magnifying-glass"></i>
           <span>Search all "{ref.current.value}"</span>
         </button>
@@ -84,7 +112,6 @@ export const AutoSuggest = () => {
           type="text"
           placeholder="Search..."
           onChange={handleSearch}
-          onBlur={handleBlur}
         />
       </div>
       <div
