@@ -1,8 +1,12 @@
 import "./Navbar.css";
 import { AutoSuggest } from "../";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { StateContext } from "../../context";
 
 export const Navbar = () => {
+  const { state } = useContext(StateContext);
+
   const isHiddenNav =
     window.location.pathname.includes("/login") ||
     window.location.pathname.includes("/product") ||
@@ -42,7 +46,11 @@ export const Navbar = () => {
         {!isHiddenNav && (
           <div className="navbar-login">
             <i class="fa-solid fa-circle-user" />
-            <Link to="login">Log In</Link>
+            {state.auth.username && state.auth.password ? (
+              <span>state.auth.username</span>
+            ) : (
+              <Link to="login">Log In</Link>
+            )}
           </div>
         )}
         {!isHiddenNav && (
