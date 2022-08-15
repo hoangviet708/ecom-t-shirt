@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 const defaultState = {
   auth: {
     username: "",
-    password: "",
+    isLogged: false,
   },
 };
 

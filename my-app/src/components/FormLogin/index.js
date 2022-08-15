@@ -1,37 +1,36 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./Login.css";
+
 export const FormLogin = () => {
-  const refName = useRef();
-  const refPass = useRef();
   const [user, setUser] = useState({
-    userName: "",
+    username: "",
     password: "",
   });
 
-  const [isDisabledLogin, setIsDisabledLogin] = useState(true);
+  const disabled = user.username === "" || user.password === "";
 
-  if (refName.current.value !== "" || refPass.current.value !== "") {
-    setIsDisabledLogin(false);
-  }
+  const handleChange = (event) => {
+    if (event.target.name === "username") {
+      setUser({ ...user, username: event.target.value });
+    }
+    if (event.target.name === "password") {
+      setUser({ ...user, password: event.target.value });
+    }
+  };
+
+  const handleOnBlur = (event) => {
+    if (event.target.name === "username") {
+      setUser({ ...user, username: event.target.value.trim() });
+    }
+    if (event.target.name === "password") {
+      setUser({ ...user, password: event.target.value.trim() });
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = refName.current.value;
-    const pass = refPass.current.value;
-
-    if (!name || !pass) {
-      alert("Khong duoc bo trong");
-      return;
-    } else {
-      const newUser = {
-        userName: name,
-        password: pass,
-      };
-      setUser(newUser);
-    }
+    //TODO: handle store user to context
   };
-  console.log(user);
 
   return (
     <div className="login-container">
@@ -40,23 +39,25 @@ export const FormLogin = () => {
           <h2 className="title-login">Login</h2>
           <label htmlFor="username">Username</label>
           <input
-            ref={refName}
-            id="username"
+            name="username"
             type="text"
             placeholder="Type your username"
+            onChange={handleChange}
+            onBlur={handleOnBlur}
           />
           <label htmlFor="password">Password</label>
           <input
-            ref={refPass}
-            id="password"
+            name="password"
             type="password"
-            placeholder="Type your username"
+            placeholder="Type your password"
+            onChange={handleChange}
+            onBlur={handleOnBlur}
           />
           <a className="forgot-password" href="/">
             Forgot password?
           </a>
           <button
-            disabled={isDisabledLogin}
+            disabled={disabled}
             onClick={handleSubmit}
             className="btn-login"
           >
