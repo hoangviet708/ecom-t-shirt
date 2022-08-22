@@ -7,6 +7,8 @@ import { Navbar } from "./Navbar";
 import { AutoSuggest } from "./AutoSuggest";
 import { Slide } from "./Slide";
 import { FormLogin } from "./FormLogin";
+import { ProductDetail } from "./ProductDetail";
+import { RadioCustom } from "./RadioCustom";
 
 export {
   Header,
@@ -18,4 +20,6 @@ export {
   AutoSuggest,
   Slide,
   FormLogin,
+  ProductDetail,
+  RadioCustom,
 };
