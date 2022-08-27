@@ -12,10 +12,13 @@ const stateReducer = (state, action) => {
 
   switch (type) {
     case "SET_AUTH":
-      console.log("type, payload", type, payload);
       return {
         ...state,
-        auth: payload,
+        auth: {
+          ...state.auth,
+          isLogged: true,
+          username: payload.username,
+        },
       };
     default:
       return state;

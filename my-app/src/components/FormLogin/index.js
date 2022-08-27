@@ -1,14 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { StateContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 export const FormLogin = () => {
-  const { state } = useContext(StateContext);
+  const { state, dispatchState } = useContext(StateContext);
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-
   const disabled = user.username === "" || user.password === "";
 
   const handleChange = (event) => {
@@ -31,10 +32,17 @@ export const FormLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
-    //TODO:
-    // dispatchState;
+    dispatchState({
+      type: "SET_AUTH",
+      payload: user,
+    });
   };
+
+  useEffect(() => {
+    if (state.auth.isLogged) {
+      navigate("/");
+    }
+  }, [navigate, state]);
 
   return (
     <div className="login-container">
@@ -70,9 +78,9 @@ export const FormLogin = () => {
           <div className="login-social">
             <p>Or Sign Up Using</p>
             <div className="social-icon">
-              <i class="fa-brands fa-facebook"></i>
-              <i class="fa-brands fa-square-twitter"></i>
-              <i class="fa-brands fa-google"></i>
+              <i className="fa-brands fa-facebook"></i>
+              <i className="fa-brands fa-square-twitter"></i>
+              <i className="fa-brands fa-google"></i>
             </div>
           </div>
           <p>Or Sign Up Using</p>
