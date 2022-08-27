@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header, Footer, Content } from "../../components";
 import { productLists } from "../../common/sampleData";
+import { ProductDetail } from "../../components";
 
 const ProductPage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -21,13 +22,7 @@ const ProductPage = () => {
   return (
     <div>
       <Header />
-      <Content
-        children={
-          <div>
-            <h1>ProductAll</h1>
-          </div>
-        }
-      />
+      <Content children={<ProductDetail />} />
       <Footer />
     </div>
   );
