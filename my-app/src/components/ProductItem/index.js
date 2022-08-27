@@ -6,6 +6,7 @@ export const ProductItem = ({ product }) => {
   const [quickView, setQuickView] = useState("quickViewButton");
   const ref = useRef();
   const navigate = useNavigate();
+  const isShowAddToCart = window.location.pathname.includes("/search");
 
   const onClickQuickView = (product) => () => {
     navigate(`product/${product.id}`);
@@ -21,12 +22,18 @@ export const ProductItem = ({ product }) => {
     ref.current.src = product.imageFront;
   };
 
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    //TODO: handle addtocart
+  };
+
   return (
     <div
       onClick={onClickQuickView(product)}
       className="productItem"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      style={{ width: isShowAddToCart ? "33.33%" : "25%" }}
     >
       <div className="viewProductImage">
         <img
@@ -41,6 +48,11 @@ export const ProductItem = ({ product }) => {
       <span className="cost">
         ${product.cost ? Number(product.cost).toFixed(2) : "N/A"}
       </span>
+      {isShowAddToCart && (
+        <button onClick={handleAddToCart} className="add-to-cart">
+          Add To Cart
+        </button>
+      )}
     </div>
   );
 };

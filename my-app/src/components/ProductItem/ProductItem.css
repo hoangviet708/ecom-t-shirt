@@ -1,6 +1,5 @@
 .productItem {
   padding: 35px 35px;
-  width: 25%;
   position: relative;
 }
 
@@ -40,4 +39,21 @@
 .quickViewButton.open {
   visibility: visible;
   max-height: 100px;
+}
+
+.add-to-cart {
+  position: absolute;
+  bottom: -5px;
+  left: 30px;
+  width: 80%;
+  color: var(--text-white);
+  background-color: var(--text-black);
+  cursor: pointer;
+  padding: 10px 0;
+  border: none;
+  z-index: 2;
+  transition: all 0.3s ease-in;
+}
+.add-to-cart:hover {
+  opacity: 0.8;
 }

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/Login";
 import ProductPage from "./pages/Product";
-import SearchPage from "./pages/Product";
+import SearchPage from "./pages/Search";
 import AdviserStateProvider from "./context";
 
 function App() {

@@ -2,13 +2,16 @@ import "./ProductDetail.css";
 import { RadioCustom } from "../../components";
 import { PlusIcon } from "../../assets/img/PlusIcon";
 import { MinusIcon } from "../../assets/img/MinusIcon";
-import { productLists } from "../../common/sampleData";
 
 import Select from "react-select";
 import { useState } from "react";
 
 const color1 = "#2ecc71";
 const color2 = "#3498db";
+const PRODUCT_INFO = "PRODUCT_INFO";
+const RETURN_POLICY = "RETURN_POLICY";
+const SHIPPING_INFO = "SHIPPING_INFO";
+const NONE_INFO = "NONE";
 
 const options = [
   { value: "small", label: "Small" },
@@ -18,13 +21,14 @@ const options = [
 
 export const ProductDetail = () => {
   const [selectedOption, setSelectedOption] = useState(options[0]);
-  const [key, setKey] = useState(1);
+  const [showInfo, setShowInfo] = useState(PRODUCT_INFO);
 
-  const handleShowInfo = (id) => {
-    if (key === id) {
-      setKey(0);
+  const handleShowInfo = (key) => () => {
+    console.log(key);
+    if (showInfo === key) {
+      setShowInfo(NONE_INFO);
     } else {
-      setKey(id);
+      setShowInfo(key);
     }
   };
 
@@ -111,16 +115,16 @@ export const ProductDetail = () => {
             <li className="product-info">
               <button
                 className="btn-info-item"
-                onClick={() => {
-                  handleShowInfo(1);
-                }}
+                onClick={handleShowInfo(PRODUCT_INFO)}
               >
                 <h2>PRODUCT INFO</h2>
-                {key === 1 ? <MinusIcon /> : <PlusIcon />}
+                {showInfo === PRODUCT_INFO ? <MinusIcon /> : <PlusIcon />}
               </button>
               <p
                 className="info-paragraph"
-                style={{ display: key === 1 ? "block" : "none" }}
+                style={{
+                  display: showInfo === PRODUCT_INFO ? "block" : "none",
+                }}
               >
                 I'm a product detail. I'm a great place to add more information
                 about your product such as sizing, material, care and cleaning
@@ -132,16 +136,16 @@ export const ProductDetail = () => {
             <li className="product-info">
               <button
                 className="btn-info-item"
-                onClick={() => {
-                  handleShowInfo(2);
-                }}
+                onClick={handleShowInfo(RETURN_POLICY)}
               >
                 <h2>RETURN & REFUND POLICY</h2>
-                {key === 2 ? <MinusIcon /> : <PlusIcon />}
+                {showInfo === RETURN_POLICY ? <MinusIcon /> : <PlusIcon />}
               </button>
               <p
                 className="info-paragraph"
-                style={{ display: key === 2 ? "block" : "none" }}
+                style={{
+                  display: showInfo === RETURN_POLICY ? "block" : "none",
+                }}
               >
                 I’m a Return and Refund policy. I’m a great place to let your
                 customers know what to do in case they are dissatisfied with
@@ -153,16 +157,16 @@ export const ProductDetail = () => {
             <li className="product-info">
               <button
                 className="btn-info-item"
-                onClick={() => {
-                  handleShowInfo(3);
-                }}
+                onClick={handleShowInfo(SHIPPING_INFO)}
               >
                 <h2>SHIPPING INFO</h2>
-                {key === 3 ? <MinusIcon /> : <PlusIcon />}
+                {showInfo === SHIPPING_INFO ? <MinusIcon /> : <PlusIcon />}
               </button>
               <p
                 className="info-paragraph"
-                style={{ display: key === 3 ? "block" : "none" }}
+                style={{
+                  display: showInfo === SHIPPING_INFO ? "block" : "none",
+                }}
               >
                 I'm a shipping policy. I'm a great place to add more information
                 about your shipping methods, packaging and cost. Providing
