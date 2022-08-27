@@ -19,7 +19,6 @@ const options = [
 const SearchPage = () => {
   const [price, setPrice] = useState(MAX_PRICE);
   const [selectedOption, setSelectedOption] = useState(options[0]);
-  const isShowAddToCart = window.location.pathname.includes("/search");
   const stylesOptionsSort = {
     control: (styles) => ({
       ...styles,
@@ -139,10 +138,7 @@ const SearchPage = () => {
                   </div>
                   <div className="products-search-list">
                     {productLists.map((product) => (
-                      <ProductItem
-                        isShowAddToCart={isShowAddToCart}
-                        product={product}
-                      />
+                      <ProductItem isShowAddToCart={true} product={product} />
                     ))}
                   </div>
                 </div>
