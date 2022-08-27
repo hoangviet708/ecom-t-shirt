@@ -2,11 +2,10 @@ import "./ProductItem.css";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ProductItem = ({ product }) => {
+export const ProductItem = ({ product, isShowAddToCart }) => {
   const [quickView, setQuickView] = useState("quickViewButton");
   const ref = useRef();
   const navigate = useNavigate();
-  const isShowAddToCart = window.location.pathname.includes("/search");
 
   const onClickQuickView = (product) => () => {
     navigate(`product/${product.id}`);

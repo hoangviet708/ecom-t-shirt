@@ -19,6 +19,7 @@ const options = [
 const SearchPage = () => {
   const [price, setPrice] = useState(MAX_PRICE);
   const [selectedOption, setSelectedOption] = useState(options[0]);
+  const isShowAddToCart = window.location.pathname.includes("/search");
   const stylesOptionsSort = {
     control: (styles) => ({
       ...styles,
@@ -36,6 +37,10 @@ const SearchPage = () => {
         cursor: "pointer",
       };
     },
+  };
+
+  const handleChangeSlider = ({ target: { value: radius } }) => {
+    setPrice(radius);
   };
   return (
     <div>
@@ -110,9 +115,7 @@ const SearchPage = () => {
                         type="range"
                         min={MIN_PRICE}
                         max={MAX_PRICE}
-                        onChange={({ target: { value: radius } }) => {
-                          setPrice(radius);
-                        }}
+                        onChange={handleChangeSlider}
                       />
                     </div>
                     <div className="price-value">
@@ -136,7 +139,10 @@ const SearchPage = () => {
                   </div>
                   <div className="products-search-list">
                     {productLists.map((product) => (
-                      <ProductItem product={product} />
+                      <ProductItem
+                        isShowAddToCart={isShowAddToCart}
+                        product={product}
+                      />
                     ))}
                   </div>
                 </div>

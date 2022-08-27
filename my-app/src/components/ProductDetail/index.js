@@ -24,7 +24,6 @@ export const ProductDetail = () => {
   const [showInfo, setShowInfo] = useState(PRODUCT_INFO);
 
   const handleShowInfo = (key) => () => {
-    console.log(key);
     if (showInfo === key) {
       setShowInfo(NONE_INFO);
     } else {
