@@ -3,7 +3,7 @@ import "./Login.css";
 import { StateContext } from "../../context";
 
 export const FormLogin = () => {
-  const [state] = useContext(StateContext);
+  const { state } = useContext(StateContext);
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -31,6 +31,7 @@ export const FormLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(state);
     //TODO:
     // dispatchState;
   };
