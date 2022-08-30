@@ -2,9 +2,11 @@ import "./ProductDetail.css";
 import { RadioCustom } from "../../components";
 import { PlusIcon } from "../../assets/img/PlusIcon";
 import { MinusIcon } from "../../assets/img/MinusIcon";
+import { productLists } from "../../common/sampleData";
 
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StateContext } from "../../context";
 
 const color1 = "#2ecc71";
 const color2 = "#3498db";
@@ -20,8 +22,11 @@ const options = [
 ];
 
 export const ProductDetail = () => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedSize, setSelectedSize] = useState(options[0]);
+  const [quantily, setQuantity] = useState("1");
+  const [color, setColor] = useState("");
   const [showInfo, setShowInfo] = useState(PRODUCT_INFO);
+  const { dispatchState } = useContext(StateContext);
 
   const handleShowInfo = (key) => () => {
     if (showInfo === key) {
@@ -31,34 +36,56 @@ export const ProductDetail = () => {
     }
   };
 
+  const productId = window.location.pathname.split("/")[2];
+  const currentProduct = productLists.find(
+    (product) => product.id === productId
+  );
+  const productDetailAdd = {
+    id: productId,
+    size: selectedSize.value,
+    quantily: quantily,
+    color: color,
+  };
+
+  const handleChangeQuantily = (e) => {
+    setQuantity(e.target.value);
+  };
+
+  const handleAddToCart = () => {
+    dispatchState({
+      type: "ADD_TO_CART",
+      payload: productDetailAdd,
+    });
+  };
+
+  const getColorSelected = (colorSelected) => {
+    setColor(colorSelected);
+  };
+
   return (
     <>
       <div className="productDetail">
         <div className="productDetail-image">
-          <img
-            src="https://static.wixstatic.com/media/ea71bb_55510ab619bc4a9db0f9e24781380f44~mv2_d_3664_4866_s_4_2.jpg/v1/fill/w_1000,h_1334,al_c,q_85,usm_0.66_1.00_0.01/ea71bb_55510ab619bc4a9db0f9e24781380f44~mv2_d_3664_4866_s_4_2.webp"
-            className="big-img"
-            alt=""
-          />
+          <img src={currentProduct.imageFront} className="big-img" alt="" />
           <div className="small-img-group">
             <img
-              src="https://static.wixstatic.com/media/ea71bb_55510ab619bc4a9db0f9e24781380f44~mv2_d_3664_4866_s_4_2.jpg/v1/fill/w_1000,h_1334,al_c,q_85,usm_0.66_1.00_0.01/ea71bb_55510ab619bc4a9db0f9e24781380f44~mv2_d_3664_4866_s_4_2.webp"
+              src={currentProduct.imageFront}
               className="small-img-col"
               alt=""
             />
 
             <img
-              src="https://static.wixstatic.com/media/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.jpg/v1/fill/w_538,h_718,al_c,q_85,usm_0.66_1.00_0.01/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.webp"
+              src={currentProduct.imageBack}
               className="small-img-col"
               alt=""
             />
             <img
-              src="https://static.wixstatic.com/media/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.jpg/v1/fill/w_538,h_718,al_c,q_85,usm_0.66_1.00_0.01/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.webp"
+              src={currentProduct.imageFront}
               className="small-img-col"
               alt=""
             />
             <img
-              src="https://static.wixstatic.com/media/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.jpg/v1/fill/w_538,h_718,al_c,q_85,usm_0.66_1.00_0.01/ea71bb_c0dc8a68689a43c5bc1f927ecb97b131~mv2_d_3664_4866_s_4_2.webp"
+              src={currentProduct.imageBack}
               className="small-img-col"
               alt=""
             />
@@ -76,29 +103,36 @@ export const ProductDetail = () => {
           <div className="description-cost">$25.00</div>
           <p className="description-size">Size</p>
           <Select
-            defaultValue={selectedOption}
-            onChange={setSelectedOption}
+            defaultValue={selectedSize}
+            onChange={setSelectedSize}
             options={options}
           />
           <p className="description-color">Color</p>
-          <RadioCustom color1={color1} color2={color2} />
+          <RadioCustom
+            getColorSelected={getColorSelected}
+            color1={color1}
+            color2={color2}
+          />
           <p className="description-quantity">Quantity</p>
           <input
             className="quantityInput"
             type="number"
             max="99999"
             min="1"
-            defaultValue="1"
+            value={quantily}
+            onChange={handleChangeQuantily}
           />
           <div className="addToCart">
-            <button className="addToCartBtn">Add To Cart</button>
-            <i class="iconHeart">
+            <button onClick={handleAddToCart} className="addToCartBtn">
+              Add To Cart
+            </button>
+            <i className="iconHeart">
               <svg
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 width="30"
                 height="30"
-                class="iconHeartSvg"
+                className="iconHeartSvg"
                 data-hook="wishlist-button-icon"
               >
                 <path

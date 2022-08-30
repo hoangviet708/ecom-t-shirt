@@ -92,7 +92,7 @@ export const AutoSuggest = () => {
           ))}
         </di>
         <button className="searchAllBtn" onClick={onClickSearchAll}>
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
           <span>Search all "{ref.current.value}"</span>
         </button>
       </div>
@@ -102,7 +102,7 @@ export const AutoSuggest = () => {
     <div className="navbar-search">
       <div className="search-icon">
         <label htmlFor="search">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </label>
       </div>
       <div className="search-input">
