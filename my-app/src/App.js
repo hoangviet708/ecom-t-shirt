@@ -5,6 +5,7 @@ import LoginPage from "./pages/Login";
 import ProductPage from "./pages/Product";
 import SearchPage from "./pages/Search";
 import AdviserStateProvider from "./context";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="search" element={<SearchPage />}>
               <Route path=":id" element={<SearchPage />} />
             </Route>
+            <Route path="cart" element={<CartPage />} />
           </Routes>
         </BrowserRouter>
       </AdviserStateProvider>

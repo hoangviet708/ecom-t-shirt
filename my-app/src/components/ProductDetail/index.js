@@ -23,7 +23,7 @@ const options = [
 
 export const ProductDetail = () => {
   const [selectedSize, setSelectedSize] = useState(options[0]);
-  const [quantily, setQuantity] = useState("1");
+  const [quantity, setQuantity] = useState("1");
   const [color, setColor] = useState("");
   const [showInfo, setShowInfo] = useState(PRODUCT_INFO);
   const { dispatchState } = useContext(StateContext);
@@ -42,12 +42,15 @@ export const ProductDetail = () => {
   );
   const productDetailAdd = {
     id: productId,
+    url: currentProduct.imageFront,
+    name: currentProduct.productName,
+    price: currentProduct.cost,
     size: selectedSize.value,
-    quantily: quantily,
+    quantity: quantity,
     color: color,
   };
 
-  const handleChangeQuantily = (e) => {
+  const handleChangeQuantity = (e) => {
     setQuantity(e.target.value);
   };
 
@@ -59,7 +62,11 @@ export const ProductDetail = () => {
   };
 
   const getColorSelected = (colorSelected) => {
-    setColor(colorSelected);
+    if (colorSelected === "color1") {
+      setColor("green");
+    } else {
+      setColor("blue");
+    }
   };
 
   return (
@@ -119,8 +126,8 @@ export const ProductDetail = () => {
             type="number"
             max="99999"
             min="1"
-            value={quantily}
-            onChange={handleChangeQuantily}
+            value={quantity}
+            onChange={handleChangeQuantity}
           />
           <div className="addToCart">
             <button onClick={handleAddToCart} className="addToCartBtn">

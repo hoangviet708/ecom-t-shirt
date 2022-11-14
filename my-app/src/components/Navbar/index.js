@@ -3,6 +3,7 @@ import { AutoSuggest } from "../";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const { state } = useContext(StateContext);
@@ -13,6 +14,11 @@ export const Navbar = () => {
     window.location.pathname.includes("/search");
 
   const isHiddenCart = window.location.pathname.includes("login");
+
+  const navigate = useNavigate();
+  const handleViewCart = () => {
+    navigate(`/cart`);
+  };
 
   return (
     <div className="navbar-container">
@@ -57,7 +63,7 @@ export const Navbar = () => {
         )}
 
         {!isHiddenCart && (
-          <div className="navbar-cart">
+          <div onClick={handleViewCart} className="navbar-cart">
             <i className="fa-solid fa-cart-shopping"></i>
             {state.cart.length > 0 && (
               <div className="value-cart">{state.cart.length}</div>
