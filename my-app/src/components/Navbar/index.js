@@ -12,11 +12,13 @@ export const Navbar = () => {
     window.location.pathname.includes("/product") ||
     window.location.pathname.includes("/search");
 
+  const isHiddenCart = window.location.pathname.includes("login");
+
   return (
     <div className="navbar-container">
       <div className="navbar-left">
         <div className="navbar-brand">
-          <a href="/">N O U S</a>
+          <Link to="/">N O U S</Link>
         </div>
         {!isHiddenNav && <AutoSuggest />}
       </div>
@@ -45,17 +47,21 @@ export const Navbar = () => {
         )}
         {!isHiddenNav && (
           <div className="navbar-login">
-            <i class="fa-solid fa-circle-user" />
-            {state.auth.username && state.auth.password ? (
-              <span>state.auth.username</span>
+            <i className="fa-solid fa-circle-user" />
+            {state.auth.username ? (
+              <span>{state.auth.username}</span>
             ) : (
               <Link to="login">Log In</Link>
             )}
           </div>
         )}
-        {!isHiddenNav && (
+
+        {!isHiddenCart && (
           <div className="navbar-cart">
-            <i class="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-cart-shopping"></i>
+            {state.cart.length > 0 && (
+              <div className="value-cart">{state.cart.length}</div>
+            )}
           </div>
         )}
       </div>

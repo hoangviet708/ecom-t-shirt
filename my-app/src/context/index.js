@@ -5,6 +5,7 @@ const defaultState = {
     username: "",
     isLogged: false,
   },
+  cart: [],
 };
 
 const stateReducer = (state, action) => {
@@ -20,6 +21,12 @@ const stateReducer = (state, action) => {
           username: payload.username,
         },
       };
+
+    case "ADD_TO_CART":
+      const newState = { ...state };
+      newState.cart.push(payload);
+      return newState;
+
     default:
       return state;
   }

@@ -56,7 +56,7 @@ const SearchPage = () => {
                 <form>
                   <div className="search-icon">
                     <label htmlFor="search-input">
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                      <i className="fa-solid fa-magnifying-glass"></i>
                     </label>
                   </div>
                   <input
@@ -75,7 +75,7 @@ const SearchPage = () => {
                     <p className="options-header">Collection</p>
                     <label className="option-item" htmlFor="option-men">
                       <input type="checkbox" id="option-men" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                       <span className="option-title">
                         Men
                         <span className="value-product-option"> (12)</span>
@@ -83,7 +83,7 @@ const SearchPage = () => {
                     </label>
                     <label className="option-item" htmlFor="option-newArrivals">
                       <input type="checkbox" id="option-newArrivals" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                       <span className="option-title">
                         New Arrivals
                         <span className="value-product-option"> (12)</span>
@@ -91,7 +91,7 @@ const SearchPage = () => {
                     </label>
                     <label className="option-item" htmlFor="option-women">
                       <input type="checkbox" id="option-women" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                       <span className="option-title">
                         Women
                         <span className="value-product-option"> (12)</span>
@@ -99,7 +99,7 @@ const SearchPage = () => {
                     </label>
                     <label className="option-item" htmlFor="option-sale">
                       <input type="checkbox" id="option-sale" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                       <span className="option-title">
                         Sale
                         <span className="value-product-option"> (8)</span>
