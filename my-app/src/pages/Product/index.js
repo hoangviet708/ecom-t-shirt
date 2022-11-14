@@ -15,6 +15,7 @@ const ProductPage = () => {
   useEffect(() => {
     if (productId) {
       const product = productLists.find((product) => product.id === productId);
+      window.scrollTo(0, 0);
       setProductDetails(product);
     }
   }, [productId]);

@@ -26,6 +26,22 @@ const stateReducer = (state, action) => {
       const newState = { ...state };
       newState.cart.push(payload);
       return newState;
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== payload),
+      };
+    case "UPDATE_CART":
+      const newStateUpdate = {
+        ...state,
+        cart: state.cart.map((obj) => {
+          if (obj.id === payload.id) {
+            return { ...obj, quantity: payload.qty };
+          }
+          return obj;
+        }),
+      };
+      return newStateUpdate;
 
     default:
       return state;
