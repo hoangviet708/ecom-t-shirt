@@ -22,7 +22,7 @@ export const Slide = () => {
         <h2 className="slideContent">
           ON ORDERS OVER $50 - USE COUPON CODE OVER50
         </h2>
-        <div>
+        <div className="shop-btn">
           <button onClick={onClickShop} className="slideBtn">
             Shop Women
           </button>

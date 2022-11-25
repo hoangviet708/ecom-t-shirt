@@ -10,6 +10,7 @@
 
 .cart-empty {
   margin-left: 10px;
+  margin-top: 15px;
 }
 
 .list-product {
@@ -24,6 +25,51 @@
 
 .list-product table {
   width: 100%;
+}
+
+.list-product .product-mobile {
+  display: none;
+  padding: 20px;
+  position: relative;
+}
+
+.list-product .product-mobile .btn-delete {
+  position: absolute;
+  font-size: 22px;
+  right: 20px;
+  top: 20px;
+  color: #888;
+}
+
+.list-product .product-mobile img {
+  width: 100px;
+  height: 133px;
+  margin-right: 30px;
+}
+
+.list-product .product-mobile .quantityInput {
+  width: 60px;
+  height: 30px;
+  padding-left: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.list-product .product-mobile .product-price {
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.list-product .product-mobile .product-name {
+  margin-bottom: 15px;
+}
+
+.list-product .product-mobile .product-des {
+  color: #888;
+  margin-bottom: 15px;
 }
 
 .list-product table thead td:nth-child(1) {
@@ -221,4 +267,31 @@
 .cart-summary .total-price p:nth-child(3) {
   font-weight: 800;
   margin-top: 5px;
+}
+
+@media screen and (max-width: 480px) {
+  .cart-container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .cart-summary {
+    width: 100%;
+    margin: 0;
+  }
+
+  .list-product {
+    width: 100%;
+  }
+
+  .list-product table {
+    display: none;
+  }
+
+  .list-product .product-mobile {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 1024px) {
 }

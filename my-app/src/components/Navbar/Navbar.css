@@ -7,6 +7,23 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
+}
+
+.xmark-mobile {
+  display: none;
+}
+
+.navbar-container .navbar-cart {
+  font-size: 20px;
+  padding: 0 15px;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+}
+
+.navbar-container .bars-mobile {
+  display: none;
 }
 
 .navbar-left {
@@ -36,10 +53,14 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 
 .navbar-right .navbar-links {
   display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  text-align: right;
 }
 
 .navbar-right .navbar-link {
@@ -105,4 +126,74 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-container .bars-mobile {
+    display: block;
+    font-size: 26px;
+    padding: 20px;
+  }
+
+  .navbar-container .navbar-cart {
+    font-size: 26px;
+  }
+
+  /* Show Menu Mobile */
+
+  .navbar-right {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #fff;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    transition: 1s;
+    transform: translateY(-100%);
+  }
+
+  .responsive_nav {
+    transform: none;
+    overscroll-behavior: contain;
+  }
+
+  .navbar-right .navbar-links {
+    font-size: 22px;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 100%;
+    flex: none;
+  }
+  .navbar-right .navbar-links .navbar-link {
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    padding: 18px 0;
+    margin: 0;
+    width: 100%;
+  }
+  .navbar-right .navbar-login {
+    margin: 0;
+    margin-top: 10px;
+    padding: 20px 0;
+    font-size: 22px;
+  }
+
+  .xmark-mobile {
+    font-size: 30px;
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
 }

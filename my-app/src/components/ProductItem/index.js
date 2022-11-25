@@ -8,7 +8,7 @@ export const ProductItem = ({ product, isShowAddToCart }) => {
   const navigate = useNavigate();
 
   const onClickQuickView = (product) => () => {
-    navigate(`product/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const onMouseEnter = () => {

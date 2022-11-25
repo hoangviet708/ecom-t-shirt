@@ -4,7 +4,7 @@ import "./searchPage.css";
 import { ProductItem } from "../../components";
 import { productLists } from "../../common/sampleData";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Select from "react-select";
 
 const MAX_PRICE = 45;
@@ -19,6 +19,21 @@ const options = [
 const SearchPage = () => {
   const [price, setPrice] = useState(MAX_PRICE);
   const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  let initSearchTerms = undefined;
+  if (window.location.pathname.includes("/search")) {
+    initSearchTerms = window.location.pathname.split("/")[2];
+  }
+  let initSearchProducts = undefined;
+  if (initSearchTerms) {
+    initSearchProducts = productLists.filter((product) =>
+      product.productName.toLowerCase().includes(initSearchTerms.toLowerCase())
+    );
+  }
+
+  const [searchTerms, setSearchTerms] = useState(initSearchTerms);
+  const [searchProducts, setSearchProducts] = useState(initSearchProducts);
+
   const stylesOptionsSort = {
     control: (styles) => ({
       ...styles,
@@ -41,6 +56,32 @@ const SearchPage = () => {
   const handleChangeSlider = ({ target: { value: radius } }) => {
     setPrice(radius);
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerms) {
+      const filterData = productLists.filter((product) =>
+        product.productName.toLowerCase().includes(searchTerms.toLowerCase())
+      );
+      if (filterData && filterData.length > 0) {
+        setSearchProducts(filterData);
+      } else {
+        setSearchProducts([]);
+      }
+    } else {
+      setSearchProducts([]);
+    }
+  };
+
+  const handleChangeInputSearch = (e) => {
+    setSearchTerms(e.target.value);
+  };
+
+  const ele_filter = useRef();
+  const handleShowFilter = () => {
+    ele_filter.current.classList.toggle("active");
+  };
+
   return (
     <div>
       <Header />
@@ -53,7 +94,7 @@ const SearchPage = () => {
             </h1>
             <div className="search-container">
               <div className="search-input">
-                <form>
+                <form onSubmit={handleSearch}>
                   <div className="search-icon">
                     <label htmlFor="search-input">
                       <i className="fa-solid fa-magnifying-glass"></i>
@@ -63,14 +104,28 @@ const SearchPage = () => {
                     id="search-input"
                     type="text"
                     placeholder="Search..."
+                    value={searchTerms}
+                    onChange={handleChangeInputSearch}
                   />
                   <div className="icon-clear">
                     <ClearSearchIcon />
                   </div>
                 </form>
               </div>
+              <button onClick={handleShowFilter} className="filter-btn">
+                Filter
+              </button>
               <div className="search-content">
-                <div className="filter-header">
+                <div ref={ele_filter} className="filter-header">
+                  <div className="header_filter_mobile">
+                    <p>Filer By</p>
+                    <div>
+                      <i
+                        onClick={handleShowFilter}
+                        className="fa-solid fa-xmark"
+                      ></i>
+                    </div>
+                  </div>
                   <div className="options-product">
                     <p className="options-header">Collection</p>
                     <label className="option-item" htmlFor="option-men">
@@ -122,7 +177,14 @@ const SearchPage = () => {
                       <span className="price-current">${price}.00</span>
                     </div>
                   </div>
+                  <button
+                    onClick={handleShowFilter}
+                    className="btn_filter_mobile"
+                  >
+                    OK
+                  </button>
                 </div>
+
                 <div className="products-search">
                   <div className="header-product-search">
                     <span>16 out of 24 items found for "p"</span>
@@ -137,9 +199,17 @@ const SearchPage = () => {
                     </div>
                   </div>
                   <div className="products-search-list">
-                    {productLists.map((product) => (
-                      <ProductItem isShowAddToCart={true} product={product} />
-                    ))}
+                    {searchProducts.length <= 0 ? (
+                      <div>No results found. Try a new search.</div>
+                    ) : (
+                      searchProducts.map((product) => (
+                        <ProductItem
+                          key={product.id}
+                          isShowAddToCart={true}
+                          product={product}
+                        />
+                      ))
+                    )}
                   </div>
                 </div>
               </div>

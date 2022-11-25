@@ -51,9 +51,17 @@
   cursor: pointer;
   padding: 10px 0;
   border: none;
-  z-index: 2;
   transition: all 0.3s ease-in;
 }
 .add-to-cart:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 480px) {
+  .productItem {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
 }

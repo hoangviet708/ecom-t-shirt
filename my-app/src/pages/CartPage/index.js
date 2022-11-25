@@ -27,6 +27,8 @@ const CartPage = () => {
     return total + current.price * current.quantity;
   }, 0);
 
+  window.scrollTo(0, 0);
+
   return (
     <div>
       <Header />
@@ -118,6 +120,44 @@ const CartPage = () => {
                     )}
                   </tbody>
                 </table>
+
+                {state.cart.length === 0 ? (
+                  <div className="cart-empty">Your cart is empty</div>
+                ) : (
+                  state.cart.map((item) => (
+                    <div className="product-mobile">
+                      <img alt="" src={item.url} className="img-product" />
+                      <div className="product-info">
+                        <div className="product-name">{item.name}</div>
+                        <div className="product-des">
+                          <div className="product-price-each">
+                            ${item.price}
+                          </div>
+                          <div className="product-size">Size: {item.size}</div>
+                          <div className="product-color">
+                            Color: {item.color}
+                          </div>
+                        </div>
+                        <input
+                          className="quantityInput"
+                          type="number"
+                          max="99999"
+                          min="1"
+                          value={item.quantity}
+                          onChange={handleChangeQuantity(item)}
+                        />
+                      </div>
+                      <i
+                        onClick={handleRemoveFromCart(item)}
+                        className="fa-solid fa-xmark btn-delete"
+                      ></i>
+                      <div className="product-price">
+                        ${item.price * item.quantity}
+                      </div>
+                    </div>
+                  ))
+                )}
+
                 <div className="action">
                   <button className="btn-continue">
                     <i className="fa-solid fa-angle-left icon-left"></i>

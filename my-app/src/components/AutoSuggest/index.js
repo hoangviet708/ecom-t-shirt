@@ -59,18 +59,18 @@ export const AutoSuggest = () => {
   };
 
   const onClickProductItem = (product) => () => {
-    navigate(`product/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const onClickSearchAll = () => {
-    navigate(`search/${ref.current.value}`);
+    navigate(`/search/${ref.current.value}`);
   };
 
   const SearchItem = ({ searchProducts }) => {
     return (
       <div ref={wrapperRef} className="suggestContainer">
         <p className="suggestContainerTitle">Products</p>
-        <di className="suggestListItems">
+        <div className="suggestListItems">
           {searchProducts.map((product) => (
             <div className="suggestItem" key={product.id}>
               <div
@@ -90,7 +90,7 @@ export const AutoSuggest = () => {
               </div>
             </div>
           ))}
-        </di>
+        </div>
         <button className="searchAllBtn" onClick={onClickSearchAll}>
           <i className="fa-solid fa-magnifying-glass"></i>
           <span>Search all "{ref.current.value}"</span>
@@ -106,13 +106,15 @@ export const AutoSuggest = () => {
         </label>
       </div>
       <div className="search-input">
-        <input
-          id="search"
-          ref={ref}
-          type="text"
-          placeholder="Search..."
-          onChange={handleSearch}
-        />
+        <form onSubmit={onClickSearchAll}>
+          <input
+            id="search"
+            ref={ref}
+            type="text"
+            placeholder="Search..."
+            onChange={handleSearch}
+          />
+        </form>
       </div>
       <div
         onClick={handleClearSearch}

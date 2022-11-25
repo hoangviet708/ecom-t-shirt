@@ -169,3 +169,17 @@
     height: 100px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .productDetail {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 15px;
+  }
+  .productDetail .productDetail-image {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+}
