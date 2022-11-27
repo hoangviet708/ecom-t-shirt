@@ -2,6 +2,7 @@ import "./cartPage.css";
 import { Header, Content, Footer } from "../../components";
 import { useContext } from "react";
 import { StateContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const { state, dispatchState } = useContext(StateContext);
@@ -10,7 +11,7 @@ const CartPage = () => {
     dispatchState({
       type: "UPDATE_CART",
       payload: {
-        id: item.id,
+        keyId: item.keyId,
         qty: e.target.value,
       },
     });
@@ -19,7 +20,7 @@ const CartPage = () => {
   const handleRemoveFromCart = (item) => () => {
     dispatchState({
       type: "REMOVE_FROM_CART",
-      payload: item.id,
+      payload: item.keyId,
     });
   };
 
@@ -28,6 +29,10 @@ const CartPage = () => {
   }, 0);
 
   window.scrollTo(0, 0);
+  const navigate = useNavigate();
+  const onClickContinute = () => {
+    navigate(`/`);
+  };
 
   return (
     <div>
@@ -122,10 +127,12 @@ const CartPage = () => {
                 </table>
 
                 {state.cart.length === 0 ? (
-                  <div className="cart-empty">Your cart is empty</div>
+                  <div className="product-mobile">
+                    <div className="cart-empty">Your cart is empty</div>
+                  </div>
                 ) : (
                   state.cart.map((item) => (
-                    <div className="product-mobile">
+                    <div key={item.id} className="product-mobile">
                       <img alt="" src={item.url} className="img-product" />
                       <div className="product-info">
                         <div className="product-name">{item.name}</div>
@@ -159,7 +166,7 @@ const CartPage = () => {
                 )}
 
                 <div className="action">
-                  <button className="btn-continue">
+                  <button onClick={onClickContinute} className="btn-continue">
                     <i className="fa-solid fa-angle-left icon-left"></i>
                     Continue Shopping
                   </button>

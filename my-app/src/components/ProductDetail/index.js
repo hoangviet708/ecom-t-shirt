@@ -26,7 +26,7 @@ export const ProductDetail = () => {
   const [quantity, setQuantity] = useState("1");
   const [color, setColor] = useState("");
   const [showInfo, setShowInfo] = useState(PRODUCT_INFO);
-  const { dispatchState } = useContext(StateContext);
+  const { state, dispatchState } = useContext(StateContext);
 
   const handleShowInfo = (key) => () => {
     if (showInfo === key) {
@@ -36,11 +36,23 @@ export const ProductDetail = () => {
     }
   };
 
+  function makeRandomKeyId(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   const productId = window.location.pathname.split("/")[2];
   const currentProduct = productLists.find(
     (product) => product.id === productId
   );
   const productDetailAdd = {
+    keyId: makeRandomKeyId(5),
     id: productId,
     url: currentProduct.imageFront,
     name: currentProduct.productName,
@@ -55,10 +67,27 @@ export const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    dispatchState({
-      type: "ADD_TO_CART",
-      payload: productDetailAdd,
-    });
+    let isItemAvailable = false;
+    const arr = state.cart;
+    for (let item of arr) {
+      if (
+        item.id === productDetailAdd.id &&
+        item.size === productDetailAdd.size &&
+        item.color === productDetailAdd.color
+      ) {
+        isItemAvailable = true;
+        break;
+      } else {
+        isItemAvailable = false;
+      }
+    }
+
+    if (!isItemAvailable) {
+      dispatchState({
+        type: "ADD_TO_CART",
+        payload: productDetailAdd,
+      });
+    }
   };
 
   const getColorSelected = (colorSelected) => {

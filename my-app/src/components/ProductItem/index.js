@@ -21,11 +21,6 @@ export const ProductItem = ({ product, isShowAddToCart }) => {
     ref.current.src = product.imageFront;
   };
 
-  const handleAddToCart = (e) => {
-    e.stopPropagation();
-    //TODO: handle addtocart
-  };
-
   return (
     <div
       onClick={onClickQuickView(product)}
@@ -47,11 +42,7 @@ export const ProductItem = ({ product, isShowAddToCart }) => {
       <span className="cost">
         ${product.cost ? Number(product.cost).toFixed(2) : "N/A"}
       </span>
-      {isShowAddToCart && (
-        <button onClick={handleAddToCart} className="add-to-cart">
-          Add To Cart
-        </button>
-      )}
+      {isShowAddToCart && <button className="add-to-cart">Add To Cart</button>}
     </div>
   );
 };
