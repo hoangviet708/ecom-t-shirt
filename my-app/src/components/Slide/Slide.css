@@ -101,4 +101,15 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .slideContainer {
+    margin: 0 40px;
+  }
+
+  .slideContainer .shop-btn {
+    display: flex;
+  }
+
+  .slideContainer .shop-btn .slideBtn {
+    margin: 0 10px;
+  }
 }

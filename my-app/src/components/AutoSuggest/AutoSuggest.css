@@ -162,4 +162,14 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .navbar-search {
+    width: 100px;
+  }
+
+  .navbar-search .search-input input {
+    width: 100px;
+  }
+  .navbar-search::after {
+    width: 100px;
+  }
 }
